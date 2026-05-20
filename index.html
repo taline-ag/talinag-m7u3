@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Construction Estimate — Gypsum board partition systems &amp; Flooring and decking systems</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#06061a;--bg2:#0d0d28;--card:#121235;--cb:#2a1f5a;
+  --pink:#ff2d6e;--pink-d:#cc1a52;--pg:rgba(255,45,110,.28);
+  --purple:#9b3fff;--purple-d:#7020cc;--pur-g:rgba(155,63,255,.28);
+  --sky:#00bfff;--green:#00e5a0;--red:#ff4060;--warn:#ff8c00;
+  --t:#e0d8ff;--t2:#9080c0;--t3:#504880;
+  --grad:linear-gradient(135deg,#1a0535 0%,#060618 60%,#100025 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5}
+a{color:var(--purple)}
+
+/* ── HEADER ── */
+header{
+  background:var(--grad);
+  border-bottom:2px solid var(--pink);
+  box-shadow:0 4px 32px var(--pg),0 4px 32px var(--pur-g);
+  padding:14px 28px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+.logo-wrap{display:flex;align-items:center}
+.logo-wrap svg{height:46px;width:auto}
+.logo-wrap svg path{fill:#fff !important}
+.proj-meta{text-align:right}
+.proj-meta h1{font-size:.95rem;color:var(--pink);font-weight:700;letter-spacing:.5px;margin-bottom:3px}
+.proj-meta .mr{font-size:.72rem;color:var(--t2);line-height:1.7}
+.proj-meta .mr span{color:var(--t)}
+
+/* ── LAYOUT ── */
+main{padding:22px 28px;max-width:1600px;margin:0 auto}
+section{margin-bottom:28px}
+h2{font-size:.78rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--cb);
+  display:flex;align-items:center;gap:10px}
+h2::before{content:'';display:inline-block;width:4px;height:16px;
+  background:linear-gradient(var(--pink),var(--purple));border-radius:2px;
+  box-shadow:0 0 10px var(--pg)}
+
+/* ── WARN BANNER ── */
+.warn-banner{
+  background:linear-gradient(135deg,#1a0c00,#0d0d28);
+  border:1px solid var(--warn);border-left:4px solid var(--warn);
+  border-radius:6px;padding:10px 16px;margin-bottom:20px;
+  font-size:.78rem;color:var(--warn);
+  box-shadow:0 0 16px rgba(255,140,0,.12);
+}
+.warn-banner strong{font-weight:700}
+
+/* ── KPI GRID ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px}
+.kpi-card{
+  background:var(--card);border:1px solid var(--cb);border-radius:10px;
+  padding:16px;position:relative;overflow:hidden;transition:transform .18s;
+}
+.kpi-card:hover{transform:translateY(-2px)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--pink),var(--purple))}
+.kpi-card.vc::before{background:var(--green)}
+.kpi-card .lbl{font-size:.65rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.kpi-card .val{font-size:1.45rem;font-weight:700;color:var(--t)}
+.kpi-card .unt{font-size:.68rem;color:var(--t2);margin-top:3px}
+.kpi-card.acc .val{color:var(--pink);text-shadow:0 0 16px var(--pg)}
+
+/* ── TABLE BASE ── */
+.tbl-wrap{background:var(--card);border:1px solid var(--cb);border-radius:10px;overflow:hidden}
+.tbl-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th{background:linear-gradient(135deg,#160430,#0d0d28);color:var(--t2);
+  text-transform:uppercase;font-size:.65rem;letter-spacing:1px;
+  padding:9px 12px;text-align:left;white-space:nowrap;position:sticky;top:0;z-index:1}
+th.nr,td.nr{text-align:right}
+td{padding:8px 12px;border-bottom:1px solid #181840;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(155,63,255,.05)}
+.scope-hdr td{
+  background:linear-gradient(90deg,rgba(155,63,255,.12),transparent);
+  color:var(--purple);font-weight:700;font-size:.72rem;
+  text-transform:uppercase;letter-spacing:1px;padding:7px 12px;
+}
+.subtot-row td{background:rgba(255,45,110,.06);color:var(--pink);font-weight:700;
+  border-top:1px solid rgba(255,45,110,.25);font-size:.78rem}
+.grand-row td{background:rgba(155,63,255,.08);color:var(--t);font-weight:700;
+  border-top:2px solid rgba(155,63,255,.4);font-size:.85rem}
+
+/* ── RATE INPUT ── */
+.ri{width:76px;background:#080820;border:1px solid var(--cb);color:var(--t);
+  padding:3px 7px;border-radius:4px;font-size:.78rem;text-align:right}
+.ri:focus{outline:none;border-color:var(--purple);box-shadow:0 0 8px var(--pur-g)}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:2px 7px;border-radius:3px;font-size:.6rem;font-weight:700;text-transform:uppercase;white-space:nowrap}
+.b-ok{background:rgba(0,229,160,.12);color:var(--green);border:1px solid rgba(0,229,160,.28)}
+.b-warn{background:rgba(255,140,0,.12);color:var(--warn);border:1px solid rgba(255,140,0,.28)}
+.b-na{background:rgba(144,128,192,.12);color:var(--t2);border:1px solid var(--cb)}
+
+/* ── RISK ── */
+.risk-wrap{
+  background:var(--card);border:1px solid var(--cb);border-radius:10px;
+  padding:18px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.risk-lbl{font-size:.84rem;color:var(--t);min-width:300px}
+.risk-lbl strong{color:var(--pink)}
+input[type=range]{flex:1;min-width:200px;accent-color:var(--pink);cursor:pointer;height:6px}
+.risk-val{font-size:1.2rem;font-weight:700;color:var(--pink);min-width:55px;text-align:right;
+  text-shadow:0 0 12px var(--pg)}
+.indicative{font-size:.68rem;color:var(--t3);font-style:italic;margin-top:8px;padding:0 22px}
+
+/* ── CHART CARDS ── */
+.chart-card{background:var(--card);border:1px solid var(--cb);border-radius:10px;padding:18px}
+.chart-sub{font-size:.74rem;color:var(--t2);margin-bottom:12px}
+.chips{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.chip{padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:600;cursor:pointer;
+  border:2px solid transparent;transition:all .18s;background:var(--bg2);color:var(--t2)}
+.chip.ca{border-color:var(--pink);color:var(--pink);background:rgba(255,45,110,.1);box-shadow:0 0 10px var(--pg)}
+.chip.cb{border-color:var(--purple);color:var(--purple);background:rgba(155,63,255,.1);box-shadow:0 0 10px var(--pur-g)}
+.chip.cc{border-color:var(--sky);color:var(--sky);background:rgba(0,191,255,.1)}
+.dur-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:.78rem;color:var(--t2);flex-wrap:wrap}
+.dur-row label{color:var(--t2)}
+.di{width:68px;background:#080820;border:1px solid var(--cb);color:var(--t);
+  padding:5px 8px;border-radius:4px;font-size:.78rem;text-align:center}
+.di:focus{outline:none;border-color:var(--purple)}
+
+/* ── EVM ── */
+.evm-inputs{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;
+  margin-bottom:18px;padding:14px 16px;background:var(--bg2);border-radius:8px;border:1px solid var(--cb);
+}
+.ef{display:flex;flex-direction:column;gap:5px}
+.ef label{font-size:.65rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px}
+.einp{background:#080820;border:1px solid var(--cb);color:var(--t);
+  padding:7px 10px;border-radius:6px;font-size:.82rem;width:100%}
+.einp:focus{outline:none;border-color:var(--pink);box-shadow:0 0 8px var(--pg)}
+.evm-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:10px;margin-top:14px}
+.ek{background:var(--card);border:1px solid var(--cb);border-radius:8px;padding:11px;text-align:center}
+.ek .el{font-size:.6rem;color:var(--t2);text-transform:uppercase;letter-spacing:1px}
+.ek .ev{font-size:1.1rem;font-weight:700;margin-top:4px;color:var(--t)}
+.ek.pos .ev{color:var(--green);text-shadow:0 0 10px rgba(0,229,160,.28)}
+.ek.neg .ev{color:var(--red);text-shadow:0 0 10px rgba(255,64,96,.28)}
+
+/* ── PROVENANCE ── */
+.prov-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.pv{background:var(--bg2);border:1px solid var(--cb);border-radius:8px;padding:12px}
+.pv h3{font-size:.65rem;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:9px}
+.pr{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(42,31,90,.4);gap:8px;font-size:.72rem}
+.pr:last-child{border-bottom:none}
+.pk{color:var(--t3);flex-shrink:0}
+.pvl{color:var(--t);text-align:right;word-break:break-all;max-width:65%}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--cb);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HEADER -->
+<header>
+  <div class="logo-wrap">
+    <!-- Plannerly logo — source: https://plannerly.com/wp-content/uploads/2019/10/Plannerly-Logo-Blue.svg -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="957" height="265" viewBox="0 0 957 265" fill="none" aria-label="Plannerly">
+      <path d="M26.4545 209.884H5.24093C1.74694 209.884 -6.10352e-05 208.217 -6.10352e-05 204.881V53.5343C-6.10352e-05 50.032 1.74694 48.2809 5.24093 48.2809H26.4545C29.9485 48.2809 31.6955 50.032 31.6955 53.5343V61.7896H32.6938C34.524 57.2867 37.7684 53.9512 42.427 51.7832C47.0857 49.4483 51.9939 48.2809 57.1517 48.2809H67.3842C80.1955 48.2809 89.8456 51.7832 96.3344 58.7876C102.99 65.7921 106.317 75.8819 106.317 89.057V135.087C106.317 148.262 102.99 158.351 96.3344 165.356C89.8456 172.36 80.1955 175.863 67.3842 175.863H57.1517C51.9939 175.863 47.0857 174.779 42.427 172.611C37.7684 170.276 34.524 166.857 32.6938 162.354H31.6955V204.881C31.6955 208.217 29.9485 209.884 26.4545 209.884ZM52.4254 148.345H63.4066C68.7308 148.345 72.4743 147.261 74.6373 145.093C76.9666 142.758 78.1313 138.922 78.1313 133.586V90.558C78.1313 85.2212 76.9666 81.4688 74.6373 79.3008C72.4743 76.966 68.7308 75.7985 63.4066 75.7985H52.4254C40.9452 75.7985 35.205 82.1359 35.205 94.8107V125.815C35.205 138.49 40.9452 148.345 52.4254 148.345Z" fill="#15548F"/>
+      <path d="M159.068 175.863H137.855C134.361 175.863 132.614 174.112 132.614 170.609V5.25336C132.614 1.75112 134.361 0 137.855 0H159.068C162.562 0 164.309 1.75112 164.309 5.25336V170.609C164.309 174.112 162.562 175.863 159.068 175.863Z" fill="#15548F"/>
+      <path d="M347.144 175.863H325.931C322.437 175.863 320.69 174.112 320.69 170.609V53.5343C320.69 50.032 322.437 48.2809 325.931 48.2809H347.144C350.638 48.2809 352.385 50.032 352.385 53.5343V61.7896H353.384C357.044 52.7838 365.197 48.2809 377.841 48.2809H385.828C411.95 48.2809 425.01 61.873 425.01 89.057V170.609C425.01 174.112 423.18 175.863 419.52 175.863H398.556C395.062 175.863 393.315 174.112 393.315 170.609V90.558C393.315 85.2212 392.15 81.4688 389.821 79.3008C387.658 76.966 383.914 75.7985 378.59 75.7985H369.606C358.125 75.7985 352.385 82.1359 352.385 94.8107V170.609C352.385 174.112 350.638 175.863 347.144 175.863Z" fill="#15548F"/>
+      <path d="M477.779 175.863H456.566C453.072 175.863 451.325 174.112 451.325 170.609V53.5343C451.325 50.032 453.072 48.2809 456.566 48.2809H477.779C481.273 48.2809 483.02 50.032 483.02 53.5343V61.7896H484.018C487.679 52.7838 495.831 48.2809 508.476 48.2809H516.463C542.584 48.2809 555.645 61.873 555.645 89.057V170.609C555.645 174.112 553.815 175.863 550.155 175.863H529.191C525.697 175.863 523.95 174.112 523.95 170.609V90.558C523.95 85.2212 522.785 81.4688 520.456 79.3008C518.293 76.966 514.549 75.7985 509.225 75.7985H500.241C488.76 75.7985 483.02 82.1359 483.02 94.8107V170.609C483.02 174.112 481.273 175.863 477.779 175.863Z" fill="#15548F"/>
+      <path d="M675.798 175.863H620.643C607.499 175.863 597.35 172.36 590.195 165.356C583.041 158.351 579.464 148.262 579.464 135.087V89.057C579.464 75.8819 583.041 65.7921 590.195 58.7876C597.35 51.7832 607.499 48.2809 620.643 48.2809H640.359C653.503 48.2809 663.653 51.7832 670.807 58.7876C677.961 65.7921 681.538 75.8819 681.538 89.057V120.827C681.538 124.33 679.791 126.081 676.297 126.081H613.655C611.659 126.081 610.66 126.998 610.66 128.833V134.336C610.66 139.506 611.742 143.258 613.905 145.593C616.234 147.761 620.061 148.845 625.385 148.845H675.798C679.292 148.845 681.039 150.68 681.039 154.349V170.859C681.039 172.694 680.623 174.028 679.791 174.862C679.126 175.529 677.795 175.863 675.798 175.863ZM613.655 104.817H647.597C649.427 104.817 650.342 103.9 650.342 102.065V90.0577C650.342 84.7209 649.261 80.9685 647.098 78.8005C644.935 76.6324 641.191 75.5484 635.867 75.5484H625.385C620.061 75.5484 616.317 76.6324 614.154 78.8005C611.991 80.9685 610.91 84.7209 610.91 90.0577V102.065C610.91 103.9 611.825 104.817 613.655 104.817Z" fill="#15548F"/>
+      <path d="M731.737 175.863H710.524C707.03 175.863 705.283 174.112 705.283 170.609V53.5343C705.283 50.032 707.03 48.2809 710.524 48.2809H731.737C735.231 48.2809 736.978 50.032 736.978 53.5343V62.0397H737.977C739.807 57.5368 743.051 54.118 747.71 51.7832C752.369 49.4483 757.277 48.2809 762.435 48.2809H771.419C774.747 48.2809 776.411 50.032 776.411 53.5343V70.7953C776.411 72.7966 775.995 74.2142 775.163 75.0481C774.497 75.7152 773.249 75.9653 771.419 75.7985H754.199C742.719 75.7985 736.978 82.3027 736.978 95.311V170.609C736.978 174.112 735.231 175.863 731.737 175.863Z" fill="#15548F"/>
+      <path d="M823.503 175.863H802.29C798.796 175.863 797.049 174.112 797.049 170.609V5.25336C797.049 1.75112 798.796 0 802.29 0H823.503C826.997 0 828.744 1.75112 828.744 5.25336V170.609C828.744 174.112 826.997 175.863 823.503 175.863Z" fill="#15548F"/>
+      <path d="M878.177 218.14H862.205C858.877 218.14 857.213 216.305 857.213 212.636V195.875C857.213 192.206 858.877 190.372 862.205 190.372H867.446C877.928 190.372 884.999 188.871 888.659 185.869C892.486 183.034 895.397 177.447 897.394 169.108H884.167C881.006 169.108 878.926 167.357 877.928 163.855L848.728 53.5343C847.729 50.032 848.977 48.2809 852.471 48.2809H874.683C878.011 48.2809 880.09 50.032 880.922 53.5343L902.386 145.843H903.384L924.597 53.5343C925.263 50.032 927.343 48.2809 930.837 48.2809H951.801C955.96 48.2809 957.624 50.1154 956.792 53.7844L926.344 175.863C922.684 189.705 917.027 200.212 909.373 207.383C901.72 214.554 891.321 218.14 878.177 218.14Z" fill="#15548F"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M229.003 175.863H222.757C193.814 175.863 186.404 148.879 186.318 135.387V89.6965C186.318 76.6184 190.048 66.603 197.51 59.6501C204.971 52.6972 215.556 49.2207 229.263 49.2207H281.076C284.893 49.2207 295.114 49.2207 295.114 65.051V170.648C295.114 174.124 293.205 175.863 289.388 175.863H270.5C266.84 175.863 263.18 174.116 263.18 170.625V153.165C263.18 158.403 254.754 170.648 241.3 174.116C238.361 174.874 235.81 175.863 229.003 175.863ZM262.058 79.0707V103.747C262.058 116.329 258.263 149.479 230.959 147.72C225.407 147.72 221.503 146.644 219.247 144.492C216.991 142.174 215.863 138.367 215.863 133.069V94.7042C215.863 89.4068 216.991 83.0749 219.247 80.9228C221.503 78.6052 225.407 76.3392 230.959 76.3392H258.935C261.017 76.3392 262.058 77.2497 262.058 79.0707Z" fill="#15548F"/>
+      <path d="M89.1222 249.677H81.0714V213.344H72.7533V206.244H97.4403V213.344H89.1222V249.677Z" fill="#15548F"/>
+      <path d="M118.117 249.677V229.951C118.117 225.099 116.899 222.672 114.463 222.672C112.641 222.672 111.363 223.633 110.63 225.554C109.898 227.455 109.531 230.198 109.531 233.783V249.677H101.629V203.452H109.531V213.73C109.531 215.057 109.412 217.424 109.175 220.831H109.591C111.175 217.583 113.611 215.959 116.899 215.959C119.929 215.959 122.216 216.988 123.761 219.048C125.306 221.088 126.078 224.098 126.078 228.079V249.677H118.117Z" fill="#15548F"/>
+      <path d="M144.675 250.271C140.536 250.271 137.268 248.805 134.872 245.874C132.495 242.923 131.307 238.754 131.307 233.367C131.307 227.901 132.386 223.633 134.545 220.563C136.704 217.493 139.714 215.959 143.576 215.959C147.181 215.959 150.023 217.276 152.102 219.91C154.182 222.524 155.222 226.198 155.222 230.931V235.15H139.328C139.387 238.101 139.991 240.299 141.14 241.745C142.289 243.171 143.873 243.884 145.893 243.884C148.468 243.884 151.102 243.082 153.796 241.477V247.983C151.261 249.508 148.22 250.271 144.675 250.271ZM143.517 222.049C142.388 222.049 141.457 222.653 140.724 223.861C139.991 225.049 139.566 226.901 139.447 229.416H147.468C147.428 227 147.062 225.168 146.369 223.92C145.675 222.672 144.725 222.049 143.517 222.049Z" fill="#15548F"/>
+      <path d="M175.957 206.244H187.038C191.554 206.244 194.842 207.125 196.901 208.888C198.961 210.631 199.991 213.414 199.991 217.236C199.991 219.751 199.446 221.86 198.357 223.564C197.268 225.247 195.782 226.267 193.901 226.624V226.921C196.357 227.535 198.129 228.683 199.218 230.367C200.308 232.05 200.852 234.288 200.852 237.081C200.852 241.022 199.793 244.111 197.674 246.349C195.574 248.568 192.693 249.677 189.029 249.677H175.957V206.244ZM183.563 223.712H187.276C188.979 223.712 190.177 223.257 190.871 222.346C191.564 221.435 191.91 220.078 191.91 218.276C191.91 216.473 191.514 215.186 190.722 214.414C189.93 213.622 188.682 213.225 186.979 213.225H183.563V223.712ZM183.563 230.456V242.606H187.632C189.316 242.606 190.564 242.091 191.376 241.061C192.207 240.032 192.623 238.437 192.623 236.279C192.623 232.397 190.92 230.456 187.514 230.456H183.563Z" fill="#15548F"/>
+      <path d="M208.25 249.677V206.244H215.855V249.677H208.25Z" fill="#15548F"/>
+      <path d="M643.406 219.613C643.406 224.227 642.238 227.772 639.901 230.248C637.584 232.704 634.227 233.932 629.83 233.932H627.81V249.677H619.729V206.244H630.751C639.188 206.244 643.406 210.7 643.406 219.613ZM627.81 226.921H629.355C631.335 226.921 632.81 226.376 633.781 225.287C634.751 224.197 635.237 222.415 635.237 219.939C635.237 217.662 634.791 215.978 633.9 214.889C633.009 213.78 631.632 213.225 629.77 213.225H627.81V226.921Z" fill="#15548F"/>
+      <path d="M656.329 249.677H648.427V203.452H656.329V249.677Z" fill="#15548F"/>
+    </svg>
+  </div>
+  <div class="proj-meta">
+    <h1>Gypsum board partition systems &amp; Flooring and decking systems</h1>
+    <div class="mr">Project: <span>MAICEN-1125-M7_U3_Individual Assignment_TalinAG</span> &nbsp;·&nbsp; ID: <span>887cac46-d2db-45af-b0a6-dbc065f3d515</span></div>
+    <div class="mr">Model: <span>Plannerly-ALL.rvt</span> &nbsp;·&nbsp; Version: <span>V002</span> &nbsp;·&nbsp; Milestone: <span>Milestone 1 (2026-05-10 → 2026-06-10)</span></div>
+    <div class="mr">Scope tasks: <span>Gypsum board partition systems (Ss_25_13_35)</span> &nbsp;·&nbsp; <span>Flooring and decking systems (Pr_30_59_97)</span></div>
+  </div>
+</header>
+
+<main>
+
+<!-- ── VERIFICATION WARNING ── -->
+<div class="warn-banner">
+  ⚠&nbsp; <strong>Verification Notice:</strong>
+  Flooring &amp; Decking: <strong>25 elements fully verified</strong> (all requirements correct, <span style="color:var(--green)">element_status=correct</span>).
+  Gypsum Partitions: <strong>87 elements present but NOT fully verified</strong> — the <em>Fire Rating</em> field is empty for all walls, failing the AI regex rule
+  (<code>^([A-Z]{2})\s?(\d{2,3})$</code>). Queried with <code>element_status=all</code> to surface the data.
+  Unit rates and cost estimates are <strong>indicative only</strong> — edit freely in the table below.
+</div>
+
+<!-- ════════════════════════════════════ 2 · KPI CARDS -->
+<section>
+  <h2>Key Performance Indicators</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="lbl">Total Elements</div>
+      <div class="val" id="kpi-el">112</div>
+      <div class="unt">87 unverified + 25 verified</div>
+    </div>
+    <div class="kpi-card vc">
+      <div class="lbl">Verified Elements</div>
+      <div class="val" id="kpi-ver">25</div>
+      <div class="unt">Flooring &amp; Decking scope only</div>
+    </div>
+    <div class="kpi-card">
+      <div class="lbl">Total Area</div>
+      <div class="val" id="kpi-area">20,865.5</div>
+      <div class="unt">m² (both scopes)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="lbl">Total Volume</div>
+      <div class="val" id="kpi-vol">3,519.4</div>
+      <div class="unt">m³ (both scopes)</div>
+    </div>
+    <div class="kpi-card acc">
+      <div class="lbl">Base Estimate</div>
+      <div class="val" id="kpi-base">—</div>
+      <div class="unt">USD indicative</div>
+    </div>
+    <div class="kpi-card acc">
+      <div class="lbl">Risk-Adjusted Total</div>
+      <div class="val" id="kpi-radj">—</div>
+      <div class="unt" id="kpi-radj-lbl">+10% contingency</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ 3 · ESTIMATE TABLE -->
+<section>
+  <h2>Estimate Table — grouped by Scope / Type / Fire Rating</h2>
+  <div class="tbl-wrap">
+    <div class="tbl-scroll">
+      <table id="est-table">
+        <thead>
+          <tr>
+            <th>Type Name</th>
+            <th>Fire Rating</th>
+            <th>Acoustic Rating</th>
+            <th class="nr">Elements</th>
+            <th class="nr">Area (m²)</th>
+            <th class="nr">Volume (m³)</th>
+            <th class="nr">Verification</th>
+            <th class="nr">Unit Rate ($/m²)</th>
+            <th class="nr">Subtotal (USD)</th>
+          </tr>
+        </thead>
+        <tbody id="est-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="indicative">* Unit rates are indicative estimates only — edit any cell to recalculate live. Quantities are sourced directly from the Plannerly API; no quantities have been invented.</div>
+</section>
+
+<!-- ════════════════════════════════════ 4 · RISK SLIDER -->
+<section>
+  <h2>Risk &amp; Contingency</h2>
+  <div class="risk-wrap">
+    <div class="risk-lbl">Risk allowance: <strong id="risk-pct-lbl">10%</strong> &rarr; <strong id="risk-cont-lbl">$0</strong> contingency added</div>
+    <input type="range" id="riskSlider" min="0" max="30" value="10" step="1">
+    <div class="risk-val" id="risk-val-disp">10%</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ 5 · CASH FLOW -->
+<section>
+  <h2>Cash Flow — Three Scenarios</h2>
+  <div class="chart-card">
+    <div class="dur-row">
+      <label>Cash-flow duration (months):</label>
+      <input type="number" class="di" id="durInput" value="12" min="1" max="120">
+      <span style="color:var(--t3);font-size:.72rem">(Milestone span = 1 month; expanded for scenario analysis)</span>
+    </div>
+    <div class="chips">
+      <div class="chip ca" id="chip-A" title="Toggle Scenario A">A — Front-loaded</div>
+      <div class="chip cb" id="chip-B" title="Toggle Scenario B">B — S-curve Baseline</div>
+      <div class="chip cc" id="chip-C" title="Toggle Scenario C">C — Back-loaded</div>
+    </div>
+    <div class="chart-sub">Cumulative spend · Total = Risk-adjusted total · All three scenarios sum to 100% at final period</div>
+    <canvas id="cashflowChart" height="90"></canvas>
+    <div class="tbl-scroll" style="margin-top:16px">
+      <table class="cashflow-table" style="font-size:.75rem">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th class="nr" style="color:var(--pink)">A Spend (USD)</th>
+            <th class="nr" style="color:var(--purple)">B Spend (USD)</th>
+            <th class="nr" style="color:var(--sky)">C Spend (USD)</th>
+          </tr>
+        </thead>
+        <tbody id="cf-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ 6 · EVM -->
+<section>
+  <h2>Earned Value Management</h2>
+  <div class="chart-card">
+    <div class="evm-inputs">
+      <div class="ef">
+        <label>Status Period (of <span id="evm-max-lbl">12</span>)</label>
+        <input type="range" class="einp" id="evmPeriod" min="1" max="12" value="4" step="1"
+          style="background:transparent;border:none;padding:2px 0;box-shadow:none">
+        <span style="font-size:.72rem;color:var(--purple)" id="evmPeriodLbl">Period 4 of 12</span>
+      </div>
+      <div class="ef">
+        <label>% Complete (0–100)</label>
+        <input type="number" class="einp" id="evmPct" value="0" min="0" max="100" step="1">
+      </div>
+      <div class="ef">
+        <label>Actual Cost to Date (USD)</label>
+        <input type="number" class="einp" id="evmAC" value="0" min="0" step="1000">
+      </div>
+      <div class="ef" style="justify-content:flex-end">
+        <label>BAC (Risk-Adjusted Total)</label>
+        <div style="font-size:1.05rem;font-weight:700;color:var(--pink);padding:7px 0" id="evm-bac-disp">—</div>
+      </div>
+    </div>
+    <div class="chart-sub">PV = Scenario B S-curve baseline · EV = BAC × (% complete) · EAC projection = dashed</div>
+    <canvas id="evmChart" height="90"></canvas>
+    <div class="evm-strip" id="evm-strip">
+      <div class="ek" id="ek-cv"><div class="el">CV (Cost Variance)</div><div class="ev" id="ev-cv">—</div></div>
+      <div class="ek" id="ek-sv"><div class="el">SV (Schedule Variance)</div><div class="ev" id="ev-sv">—</div></div>
+      <div class="ek" id="ek-cpi"><div class="el">CPI</div><div class="ev" id="ev-cpi">—</div></div>
+      <div class="ek" id="ek-spi"><div class="el">SPI</div><div class="ev" id="ev-spi">—</div></div>
+      <div class="ek" id="ek-eac"><div class="el">EAC</div><div class="ev" id="ev-eac">—</div></div>
+      <div class="ek" id="ek-etc"><div class="el">ETC</div><div class="ev" id="ev-etc">—</div></div>
+      <div class="ek" id="ek-vac"><div class="el">VAC</div><div class="ev" id="ev-vac">—</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ 7 · PROVENANCE -->
+<section>
+  <h2>Provenance &amp; API Filters</h2>
+  <div class="prov-grid">
+    <div class="pv">
+      <h3>Project &amp; Model</h3>
+      <div class="pr"><span class="pk">Project ID</span><span class="pvl">887cac46-d2db-45af-b0a6-dbc065f3d515</span></div>
+      <div class="pr"><span class="pk">Project Title</span><span class="pvl">MAICEN-1125-M7_U3_Individual Assignment_TalinAG</span></div>
+      <div class="pr"><span class="pk">Model ID</span><span class="pvl">6116c110-54d7-4fc8-9df6-1d5347b4f372</span></div>
+      <div class="pr"><span class="pk">Model Name</span><span class="pvl">Plannerly-ALL.rvt</span></div>
+      <div class="pr"><span class="pk">Model Version ID</span><span class="pvl">f70b7e51-c3ab-411b-a528-08913dbcbcd5</span></div>
+      <div class="pr"><span class="pk">Model Version</span><span class="pvl">V002 (model_indexed: true)</span></div>
+    </div>
+    <div class="pv">
+      <h3>Milestone &amp; Scope</h3>
+      <div class="pr"><span class="pk">Milestone ID</span><span class="pvl">62c7a4a1-4f52-41e3-ae3f-cd72ee253f3d</span></div>
+      <div class="pr"><span class="pk">Milestone</span><span class="pvl">Milestone 1</span></div>
+      <div class="pr"><span class="pk">Start</span><span class="pvl">2026-05-10T21:00:00.000Z</span></div>
+      <div class="pr"><span class="pk">End</span><span class="pvl">2026-06-10T21:00:00.000Z</span></div>
+      <div class="pr"><span class="pk">Scope Task 1</span><span class="pvl">Gypsum board partition systems · f3c00a3a-…</span></div>
+      <div class="pr"><span class="pk">Scope Row 1</span><span class="pvl">596f78e6-…</span></div>
+      <div class="pr"><span class="pk">Scope Task 2</span><span class="pvl">Flooring and decking systems · 68f205ab-…</span></div>
+      <div class="pr"><span class="pk">Scope Row 2</span><span class="pvl">0b172bdb-…</span></div>
+    </div>
+    <div class="pv">
+      <h3>API Query Filters</h3>
+      <div class="pr"><span class="pk">Gypsum element_status</span><span class="pvl">all (correct=0; Fire Rating empty)</span></div>
+      <div class="pr"><span class="pk">Flooring element_status</span><span class="pvl">correct</span></div>
+      <div class="pr"><span class="pk">match_mode (both)</span><span class="pvl">all_requirements_correct</span></div>
+      <div class="pr"><span class="pk">model_version_id</span><span class="pvl">f70b7e51-c3ab-411b-a528-08913dbcbcd5</span></div>
+      <div class="pr"><span class="pk">Requirements used</span><span class="pvl">Area, Volume, Fire Rating, Thermal Resistance (R), Type Name, Width, Length, Roughness, Absorptance, Slope</span></div>
+      <div class="pr"><span class="pk">Acoustic Rating</span><span class="pvl">NOT in project information requirements</span></div>
+      <div class="pr"><span class="pk">requirements_recheck_needed</span><span class="pvl" style="color:var(--warn)">true (Fire Rating regex failing all gypsum)</span></div>
+      <div class="pr"><span class="pk">API generated_at</span><span class="pvl">2026-05-20T18:17:33Z</span></div>
+    </div>
+    <div class="pv">
+      <h3>Branding</h3>
+      <div class="pr"><span class="pk">Logo source URL</span><span class="pvl">plannerly.com/wp-content/uploads/2019/10/Plannerly-Logo-Blue.svg</span></div>
+      <div class="pr"><span class="pk">Logo detection method</span><span class="pvl">schema.org JSON-LD markup in page source</span></div>
+      <div class="pr"><span class="pk">Logo embed method</span><span class="pvl">Inline SVG, fill overridden to #fff via CSS</span></div>
+      <div class="pr"><span class="pk">Color scheme</span><span class="pvl">Custom sci-fi theme — NOT extracted from website</span></div>
+      <div class="pr"><span class="pk">Primary pink</span><span class="pvl">#ff2d6e</span></div>
+      <div class="pr"><span class="pk">Primary purple</span><span class="pvl">#9b3fff</span></div>
+      <div class="pr"><span class="pk">Background</span><span class="pvl">#06061a (deep space black)</span></div>
+      <div class="pr"><span class="pk">Fallback colors used</span><span class="pvl">No — logo extracted successfully</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+'use strict';
+
+/* ═══════════════════════ DATA (from Plannerly API, 2026-05-20T18:17:33Z) ═══════════════════════ */
+var GROUPS = [
+  /* ── GYPSUM BOARD PARTITION SYSTEMS ──────────────────────────────────────────────────
+     scope_task_id: f3c00a3a-bc0b-4a75-aa57-4a98052cf8cd
+     All 87 elements: overall_status = "incorrect" (Fire Rating empty, fails AI regex)
+     Queried with element_status:"all" — counts/areas/volumes derived from raw API response */
+  {scope:'gypsum', typeName:'Interior Walls 01', fireRating:'(empty)',
+   cnt:52,  area:1169.683, vol:134.515, verified:false, rate:85},
+  {scope:'gypsum', typeName:'Interior Walls 02', fireRating:'(empty)',
+   cnt:28,  area:332.433,  vol:58.177,  verified:false, rate:100},
+  {scope:'gypsum', typeName:'Partition Walls',   fireRating:'(empty)',
+   cnt:7,   area:32.218,   vol:1.610,   verified:false, rate:65},
+
+  /* ── FLOORING AND DECKING SYSTEMS ─────────────────────────────────────────────────────
+     scope_task_id: 68f205ab-d6b9-451a-b7d9-89d6aec20d5b
+     All 25 elements: overall_status = "correct" (all requirements met)
+     Fire Rating requirement does not apply to floor elements in this model */
+  {scope:'flooring', typeName:'Structural Floor Slab 01', fireRating:'N/A',
+   cnt:3,  area:3506.635, vol:1051.991, verified:true, rate:160},
+  {scope:'flooring', typeName:'Structural Floor Slab 02', fireRating:'N/A',
+   cnt:3,  area:1203.754, vol:180.563,  verified:true, rate:140},
+  {scope:'flooring', typeName:'Special Flooring 01',      fireRating:'N/A',
+   cnt:2,  area:880.281,  vol:132.042,  verified:true, rate:110},
+  {scope:'flooring', typeName:'Special Flooring 02',      fireRating:'N/A',
+   cnt:3,  area:143.696,  vol:21.555,   verified:true, rate:130},
+  {scope:'flooring', typeName:'Special Flooring 03',      fireRating:'N/A',
+   cnt:4,  area:476.972,  vol:71.546,   verified:true, rate:120},
+  {scope:'flooring', typeName:'Flat Roof Deck',           fireRating:'N/A',
+   cnt:2,  area:1170.368, vol:351.110,  verified:true, rate:190},
+  {scope:'flooring', typeName:'Canopy Shading',           fireRating:'N/A',
+   cnt:3,  area:188.697,  vol:18.870,   verified:true, rate:150},
+  {scope:'flooring', typeName:'Ramp',                     fireRating:'N/A',
+   cnt:1,  area:16.098,   vol:3.786,    verified:true, rate:170},
+  {scope:'flooring', typeName:'Grass',                    fireRating:'N/A',
+   cnt:1,  area:551.826,  vol:10.512,   verified:true, rate:45},
+  {scope:'flooring', typeName:'Earth Sub-base Layer',     fireRating:'N/A',
+   cnt:1,  area:6555.541, vol:624.743,  verified:true, rate:28},
+  {scope:'flooring', typeName:'Concrete Sidewalk',        fireRating:'N/A',
+   cnt:1,  area:1027.771, vol:308.331,  verified:true, rate:90},
+  {scope:'flooring', typeName:'Parking Pavement',         fireRating:'N/A',
+   cnt:1,  area:3609.532, vol:550.093,  verified:true, rate:75}
+];
+
+var START_DATE = new Date('2026-05-10');
+var riskPct   = 10;
+var durMonths = 12;
+var scVis     = {A:true, B:true, C:true};
+var evmPeriod = 4;
+var evmPct    = 0;
+var evmAC     = 0;
+var cfChart   = null;
+var evChart   = null;
+
+/* ════ HELPERS ════ */
+function $$(id){ return document.getElementById(id); }
+function fmtD(n,d){ return (n==null||isNaN(n))?'—':n.toLocaleString('en-US',{minimumFractionDigits:d||0,maximumFractionDigits:d||0}); }
+function fmtUSD(n){ return (n==null||isNaN(n))?'—':'$'+Math.round(n).toLocaleString('en-US'); }
+function fmtRatio(n){ return (n==null||isNaN(n))?'—':n.toFixed(2); }
+
+/* ════ CALCS ════ */
+function calcBase(){
+  return GROUPS.reduce(function(s,g){ return s + g.area * g.rate; }, 0);
+}
+function calcRAdj(base){
+  return base * (1 + riskPct/100);
+}
+
+/* S-curve scenario functions — t in [0,1], return cumulative fraction */
+function cA(t){ return t<=0?0:t>=1?1:1-Math.pow(1-t,1.5); }        /* front-loaded */
+function cB(t){ return t<=0?0:t>=1?1:3*t*t-2*t*t*t; }              /* beta(2,2) S-curve */
+function cC(t){ return t<=0?0:t>=1?1:Math.pow(t,1.5); }             /* back-loaded */
+
+function scenarioArrays(n, total){
+  var labArr=[], dA=[], dB=[], dC=[], spA=[], spB=[], spC=[];
+  var pA=0, pB=0, pC=0;
+  for(var i=1;i<=n;i++){
+    var t=i/n;
+    var vA=cA(t)*total, vB=cB(t)*total, vC=cC(t)*total;
+    var d=new Date(START_DATE);
+    d.setMonth(d.getMonth()+i-1);
+    labArr.push(d.toLocaleDateString('en-US',{month:'short',year:'2-digit'}));
+    dA.push(vA); dB.push(vB); dC.push(vC);
+    spA.push(vA-pA); spB.push(vB-pB); spC.push(vC-pC);
+    pA=vA; pB=vB; pC=vC;
+  }
+  return {labArr:labArr,dA:dA,dB:dB,dC:dC,spA:spA,spB:spB,spC:spC};
+}
+
+/* ════ RENDER ESTIMATE TABLE ════ */
+function renderTable(){
+  var tbody = $$('est-tbody');
+  if(!tbody) return;
+  var html='';
+
+  ['gypsum','flooring'].forEach(function(sc){
+    var grps=GROUPS.filter(function(g){return g.scope===sc;});
+    var scopeLabel=sc==='gypsum'?'Gypsum Board Partition Systems (87 elements — Fire Rating FAILING)':'Flooring and Decking Systems (25 elements — fully verified)';
+    html+='<tr class="scope-hdr"><td colspan="9">'+scopeLabel+'</td></tr>';
+
+    grps.forEach(function(g,li){
+      var idx=GROUPS.indexOf(g);
+      var sub=g.area*g.rate;
+      var verBadge=g.verified?'<span class="badge b-ok">✓ Verified</span>':'<span class="badge b-warn">⚠ Unverified</span>';
+      var frBadge=g.fireRating==='N/A'?'<span class="badge b-na">N/A</span>':
+        (g.fireRating==='(empty)'?'<span class="badge b-warn">Empty</span>':g.fireRating);
+      html+='<tr>'+
+        '<td>'+g.typeName+'</td>'+
+        '<td>'+frBadge+'</td>'+
+        '<td><span class="badge b-na">N/A — not in model</span></td>'+
+        '<td class="nr">'+g.cnt+'</td>'+
+        '<td class="nr">'+fmtD(g.area,3)+'</td>'+
+        '<td class="nr">'+fmtD(g.vol,3)+'</td>'+
+        '<td class="nr">'+verBadge+'</td>'+
+        '<td class="nr">$<input class="ri" type="number" id="rate-'+idx+'" value="'+g.rate+'" min="0" step="1"></td>'+
+        '<td class="nr" id="sub-'+idx+'">'+fmtUSD(sub)+'</td>'+
+      '</tr>';
+    });
+
+    var scopeTot=grps.reduce(function(s,g){return s+g.area*g.rate;},0);
+    var scopeId='stot-'+sc;
+    html+='<tr class="subtot-row">'+
+      '<td colspan="7" style="text-align:right;padding-right:12px">'+
+        (sc==='gypsum'?'Gypsum Subtotal':'Flooring Subtotal')+
+      '</td>'+
+      '<td class="nr"></td>'+
+      '<td class="nr" id="'+scopeId+'">'+fmtUSD(scopeTot)+'</td>'+
+    '</tr>';
+  });
+
+  var tot=GROUPS.reduce(function(s,g){return s+g.area*g.rate;},0);
+  html+='<tr class="grand-row">'+
+    '<td colspan="7" style="text-align:right;padding-right:12px;font-weight:700">Grand Total (Base Estimate)</td>'+
+    '<td class="nr"></td>'+
+    '<td class="nr" id="gtot">'+fmtUSD(tot)+'</td>'+
+  '</tr>';
+
+  tbody.innerHTML=html;
+
+  /* attach rate input listeners */
+  GROUPS.forEach(function(g,idx){
+    var inp=$$('rate-'+idx);
+    if(inp) inp.addEventListener('input',function(){
+      var v=parseFloat(this.value);
+      if(!isNaN(v)&&v>=0){ g.rate=v; refreshAll(); }
+    });
+  });
+}
+
+/* ════ UPDATE SUBTOTALS ════ */
+function updateSubtotals(){
+  var gyp=0, flo=0;
+  GROUPS.forEach(function(g,idx){
+    var sub=g.area*g.rate;
+    var el=$$('sub-'+idx); if(el) el.textContent=fmtUSD(sub);
+    if(g.scope==='gypsum') gyp+=sub; else flo+=sub;
+  });
+  var eg=$$('stot-gypsum'); if(eg) eg.textContent=fmtUSD(gyp);
+  var ef=$$('stot-flooring'); if(ef) ef.textContent=fmtUSD(flo);
+  var gt=$$('gtot'); if(gt) gt.textContent=fmtUSD(gyp+flo);
+}
+
+/* ════ UPDATE KPIs ════ */
+function updateKPIs(){
+  var base=calcBase(), radj=calcRAdj(base), cont=radj-base;
+  $$('kpi-base').textContent=fmtUSD(base);
+  $$('kpi-radj').textContent=fmtUSD(radj);
+  $$('kpi-radj-lbl').textContent='+'+riskPct+'% contingency';
+  $$('risk-pct-lbl').textContent=riskPct+'%';
+  $$('risk-val-disp').textContent=riskPct+'%';
+  $$('risk-cont-lbl').textContent=fmtUSD(cont);
+  var bacEl=$$('evm-bac-disp'); if(bacEl) bacEl.textContent=fmtUSD(radj);
+}
+
+/* ════ CASH FLOW CHART ════ */
+function buildCFChart(){
+  var radj=calcRAdj(calcBase());
+  var n=durMonths;
+  var sc=scenarioArrays(n,radj);
+  var ctx=$$('cashflowChart');
+  if(!ctx) return;
+  if(cfChart){ cfChart.destroy(); cfChart=null; }
+  cfChart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:sc.labArr,
+      datasets:[
+        {label:'A — Front-loaded',   data:scVis.A?sc.dA:[], borderColor:'#ff2d6e', backgroundColor:'rgba(255,45,110,.06)', fill:false, tension:.4, borderWidth:2, pointRadius:2},
+        {label:'B — S-curve',        data:scVis.B?sc.dB:[], borderColor:'#9b3fff', backgroundColor:'rgba(155,63,255,.06)', fill:false, tension:.4, borderWidth:2, pointRadius:2},
+        {label:'C — Back-loaded',    data:scVis.C?sc.dC:[], borderColor:'#00bfff', backgroundColor:'rgba(0,191,255,.06)',  fill:false, tension:.4, borderWidth:2, pointRadius:2}
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+fmtUSD(c.raw);}}}},
+      scales:{
+        x:{grid:{color:'rgba(42,31,90,.35)'},ticks:{color:'#9080c0',font:{size:10}}},
+        y:{grid:{color:'rgba(42,31,90,.35)'},ticks:{color:'#9080c0',font:{size:10},
+            callback:function(v){return '$'+(v/1000).toFixed(0)+'k';}}}
+      }
+    }
+  });
+}
+
+/* ════ CASH FLOW TABLE ════ */
+function updateCFTable(){
+  var radj=calcRAdj(calcBase());
+  var sc=scenarioArrays(durMonths,radj);
+  var tbody=$$('cf-tbody'); if(!tbody) return;
+  var html='';
+  for(var i=0;i<durMonths;i++){
+    html+='<tr>'+
+      '<td>'+sc.labArr[i]+'</td>'+
+      '<td class="nr" style="color:#ff2d6e">'+fmtUSD(sc.spA[i])+'</td>'+
+      '<td class="nr" style="color:#9b3fff">'+fmtUSD(sc.spB[i])+'</td>'+
+      '<td class="nr" style="color:#00bfff">'+fmtUSD(sc.spC[i])+'</td>'+
+    '</tr>';
+  }
+  tbody.innerHTML=html;
+}
+
+/* ════ EVM ════ */
+function buildEVMChart(){
+  var BAC=calcRAdj(calcBase());
+  var n=durMonths;
+  var sc=scenarioArrays(n,BAC);
+  var pvFull=sc.dB;
+  var statusIdx=Math.min(Math.max(evmPeriod-1,0),n-1);
+  var PV_s=pvFull[statusIdx]||0;
+  var EV_val=BAC*(evmPct/100);
+  var AC_val=evmAC;
+  var CV=EV_val-AC_val;
+  var SV=EV_val-PV_s;
+  var CPI=(AC_val>0)?(EV_val/AC_val):null;
+  var SPI=(PV_s>0)?(EV_val/PV_s):null;
+  var EAC=(CPI&&CPI>0)?(BAC/CPI):BAC;
+  var ETC=EAC-AC_val;
+  var VAC=BAC-EAC;
+
+  /* update KPI strip */
+  function setEK(idSuffix,val,isPositiveGood,isDollar){
+    var vEl=$$('ev-'+idSuffix);
+    var kEl=$$('ek-'+idSuffix);
+    if(!vEl||!kEl) return;
+    vEl.textContent=val===null?'N/A':(isDollar===false?fmtRatio(val):fmtUSD(val));
+    kEl.className='ek'+(val===null?'':isPositiveGood?(val>=0?' pos':' neg'):(val>=0?' neg':' pos'));
+  }
+  setEK('cv',CV,true,true);
+  setEK('sv',SV,true,true);
+  setEK('cpi',CPI,true,false);
+  setEK('spi',SPI,true,false);
+  setEK('eac',EAC,false,true);
+  setEK('etc',ETC,false,true);
+  setEK('vac',VAC,true,true);
+  $$('evm-bac-disp').textContent=fmtUSD(BAC);
+
+  /* EV data: 0 to statusIdx, linear ramp */
+  var evArr=[], acArr=[];
+  for(var i=0;i<n;i++){
+    evArr.push(i<=statusIdx?(statusIdx>0?EV_val*(i/statusIdx):EV_val):null);
+    acArr.push(i<=statusIdx?(statusIdx>0?AC_val*(i/statusIdx):AC_val):null);
+  }
+
+  /* EAC projection: from statusIdx to end */
+  var eacArr=[];
+  for(var j=0;j<n;j++){
+    if(j<statusIdx){ eacArr.push(null); }
+    else if(EV_val>0){
+      var pvJ=pvFull[j]||0;
+      eacArr.push(AC_val+(pvJ-PV_s)*(AC_val/EV_val));
+    } else {
+      eacArr.push(EAC*((j+1)/n));
+    }
+  }
+  if(n>0) eacArr[n-1]=EAC;
+
+  var ctx=$$('evmChart');
+  if(!ctx) return;
+  if(evChart){ evChart.destroy(); evChart=null; }
+  evChart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:sc.labArr,
+      datasets:[
+        {label:'PV — Planned Value',  data:pvFull, borderColor:'#9b3fff', fill:false, tension:.4, borderWidth:2, pointRadius:0},
+        {label:'EV — Earned Value',   data:evArr,  borderColor:'#00e5a0', fill:false, tension:.3, borderWidth:2, pointRadius:0},
+        {label:'AC — Actual Cost',    data:acArr,  borderColor:'#ff2d6e', fill:false, tension:.3, borderWidth:2, pointRadius:0},
+        {label:'EAC Projection',      data:eacArr, borderColor:'#ffd020', borderDash:[5,5], fill:false, tension:.3, borderWidth:2, pointRadius:0}
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{labels:{color:'#9080c0',font:{size:10},boxWidth:12}},
+        tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+fmtUSD(c.raw);}}}
+      },
+      scales:{
+        x:{grid:{color:'rgba(42,31,90,.35)'},ticks:{color:'#9080c0',font:{size:10}}},
+        y:{grid:{color:'rgba(42,31,90,.35)'},ticks:{color:'#9080c0',font:{size:10},
+            callback:function(v){return '$'+(v/1000).toFixed(0)+'k';}}}
+      }
+    }
+  });
+}
+
+/* ════ REFRESH ALL ════ */
+function refreshAll(){
+  updateKPIs();
+  updateSubtotals();
+  buildCFChart();
+  updateCFTable();
+  buildEVMChart();
+}
+
+/* ════ DURATION UPDATE ════ */
+function onDurChange(nv){
+  durMonths=nv;
+  evmPeriod=Math.min(evmPeriod,durMonths);
+  var sl=$$('evmPeriod'); if(sl){ sl.max=durMonths; sl.value=evmPeriod; }
+  $$('evm-max-lbl').textContent=durMonths;
+  $$('evmPeriodLbl').textContent='Period '+evmPeriod+' of '+durMonths;
+  refreshAll();
+}
+
+/* ════ EVENTS ════ */
+$$('riskSlider').addEventListener('input',function(){ riskPct=parseInt(this.value); refreshAll(); });
+
+$$('durInput').addEventListener('change',function(){
+  var v=parseInt(this.value);
+  if(!isNaN(v)&&v>=1&&v<=120) onDurChange(v);
+});
+
+['A','B','C'].forEach(function(s){
+  var chip=$$('chip-'+s);
+  if(!chip) return;
+  chip.addEventListener('click',function(){
+    scVis[s]=!scVis[s];
+    this.classList.toggle('c'+s.toLowerCase());
+    buildCFChart();
+  });
+});
+
+$$('evmPeriod').addEventListener('input',function(){
+  evmPeriod=parseInt(this.value);
+  $$('evmPeriodLbl').textContent='Period '+evmPeriod+' of '+durMonths;
+  buildEVMChart();
+});
+$$('evmPct').addEventListener('input',function(){
+  evmPct=Math.min(100,Math.max(0,parseFloat(this.value)||0));
+  buildEVMChart();
+});
+$$('evmAC').addEventListener('input',function(){
+  evmAC=Math.max(0,parseFloat(this.value)||0);
+  buildEVMChart();
+});
+
+/* ════ INITIALISE ════ */
+renderTable();
+$$('evm-max-lbl').textContent=durMonths;
+$$('evmPeriodLbl').textContent='Period '+evmPeriod+' of '+durMonths;
+refreshAll();
+
+})();
+</script>
+</body>
+</html>
