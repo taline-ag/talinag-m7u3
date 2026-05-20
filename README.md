@@ -1,2 +1,2 @@
 # talinag-m7u3
-M7U3 Host
+M7U3 Assignment Host
